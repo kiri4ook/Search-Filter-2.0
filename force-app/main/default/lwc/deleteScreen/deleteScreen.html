@@ -1,0 +1,15 @@
+<template>
+   <lightning-card if:true={isShowDeleteScreen}>
+      <section  class="slds-modal slds-fade-in-open">
+         <div class="slds-modal__container">
+            <lightning-quick-action-panel  header="Delete Contact">
+               <h1>Are you sure you want to delete this contact?</h1>
+               <div slot="footer">
+                  <lightning-button variant="neutral"  label="Delete" name="Delete" onclick={deleteContact}></lightning-button>
+                  <lightning-button variant="brand" label="Cancel" class="slds-m-left_x-small" onclick={closeDeleteScreen}></lightning-button>
+               </div>
+            </lightning-quick-action-panel> 
+         </div>
+      </section> 
+   </lightning-card>
+</template>

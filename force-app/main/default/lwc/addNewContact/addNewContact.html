@@ -1,0 +1,45 @@
+<template>
+   <lightning-card if:true={isShowCreateContactScreen}>
+      <section  class="slds-modal slds-fade-in-open">
+         <div class="slds-modal__container">
+            <lightning-quick-action-panel  header="New Contact">
+                  <div class="slds-form-element">
+                     <lightning-input label="First Name"
+                                       value={firstName} 
+                                       onchange={handleFirstNameChange}></lightning-input>
+                  </div>
+                  <div class="slds-form-element">
+                     <lightning-input label="Last Name" type="text"
+                                       value={lastName} 
+                                       onchange={handleLastNameChange} 
+                                       required = true></lightning-input>
+                  </div>
+                  <div class="slds-form-element">
+                        <lightning-input label="Email" type="email" 
+                                          value={email} 
+                                          onchange={handleEmailChange}
+                                          required = true>
+                        </lightning-input>
+                  </div>
+                  <div class="slds-form-element">
+                     <c-custom-lookup-comp onselected={handleAccountNameChange}></c-custom-lookup-comp><br/>
+                  </div>
+                  <div class="slds-form-element">
+                     <lightning-input label="Mobile Phone"
+                                       value={phone} 
+                                       onchange={handlePhoneChange} ></lightning-input>
+                  </div>
+               <div slot="footer">
+                  <lightning-button variant="neutral"  
+                                    label="Cancel" 
+                                    onclick={closeCreateContactScreen}></lightning-button>
+                  <lightning-button variant="brand" 
+                                    label="Save" 
+                                    class="slds-m-left_x-small" 
+                                    onclick={saveContact}></lightning-button>
+               </div>
+            </lightning-quick-action-panel> 
+         </div>
+      </section> 
+   </lightning-card>
+</template>

@@ -1,0 +1,28 @@
+<template>
+   <lightning-card>
+      <lightning-layout multiple-rows="true" vertical-align="end">
+         <lightning-layout-item size="4" padding="around-small">
+            <lightning-input type="text" label="Search By Name"
+               value={searchKey} 
+               onchange={handelSearchKey}> 
+            </lightning-input>
+         </lightning-layout-item >
+         <lightning-layout-item padding="around-small">
+            <lightning-button label="Filter" variant="brand" onclick={filterHandler}></lightning-button>
+         </lightning-layout-item>
+         <lightning-layout-item padding="around-small">
+            <lightning-button label="New" variant="neutral" onclick={newHandler}></lightning-button>
+         </lightning-layout-item>
+            <lightning-datatable
+               key-field="Id"
+               data={contacts}
+               columns={columns}
+               onrowaction={handleRowAction}
+               hide-checkbox-column="true"
+               show-row-number-column="true">
+            </lightning-datatable>
+      </lightning-layout>
+      <c-delete-screen oncallpasstoparent={fetchVisible} record-row={recordRow}></c-delete-screen>
+      <c-add-new-contact oncallpasstoparent={fetchVisible}></c-add-new-contact>
+   </lightning-card> 
+</template>

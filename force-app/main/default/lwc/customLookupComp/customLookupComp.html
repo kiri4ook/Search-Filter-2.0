@@ -1,0 +1,19 @@
+<template>
+   <lightning-input  label="Account Name" value={accountName} placeholder="Search Accounts..." 
+                     onchange={handleKeyChange} onkeydown={handleKeyChange} 
+                     onclick={handleClick} onblur={handleClick} aria-activedescendant="option1"
+                     aria-autocomplete="list" aria-controls="listbox-id-12" role="textbox">
+      </lightning-input>                                  
+   <div if:true={messageResult}>No Result Found!</div>
+   <template if:true={showSearchedValues}>
+      <div class="slds-box" style="height: 130px; overflow-y: scroll;">
+         <ul class="" role="">
+            <template for:each={accountList} for:item="actObj">
+               <li   class="slds-p-around_x-small" style="cursor: pointer;" key={actObj.Id}
+                     onclick={handleParentSelection} data-value={actObj.Id}
+                     data-label={actObj.Name}>{actObj.Name}</li>
+            </template>
+         </ul>
+      </div>
+   </template>
+</template>
