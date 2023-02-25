@@ -1,7 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import getContacts from '@salesforce/apex/ContactController.getContacts';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
-import deleteSelectedContacts from '@salesforce/apex/ContactController.deleteContacts';
+import deleteSelectedContact from '@salesforce/apex/ContactController.deleteContacts';
 
 export default class DeleteScreen extends LightningElement {
 
@@ -23,14 +23,12 @@ export default class DeleteScreen extends LightningElement {
       this.isShowDeleteScreen = false;
    } 
 
-   deleteContact(){
-      this.deleteCon(this.recordRow);
+   onDelete(){
+      this.deleteContact(this.recordRow);
    } 
 
-   deleteCon (currentRow) {
-      let currentRecord = [];
-      currentRecord.push(currentRow.Id);
-      deleteSelectedContacts ({lstConIds: currentRecord}).then(()=> {
+   deleteContact (currentRow) {
+      deleteSelectedContact ({contactId: currentRow.Id}).then(()=> {
          this.dispatchEvent(new ShowToastEvent({
             title: 'Success!!',
             message: 'Contact ' + currentRow.FirstName + ' '+ currentRow.LastName +' deleted.',
