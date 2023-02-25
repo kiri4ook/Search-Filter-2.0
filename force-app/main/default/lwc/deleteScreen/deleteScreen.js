@@ -1,16 +1,20 @@
 import { LightningElement, api, wire } from 'lwc';
-import getContactList from '@salesforce/apex/ContactController.getContactList';
+import getContacts from '@salesforce/apex/ContactController.getContacts';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
-import delSelectedCons from '@salesforce/apex/ContactController.deleteContacts';
+import deleteSelectedContacts from '@salesforce/apex/ContactController.deleteContacts';
 
 export default class DeleteScreen extends LightningElement {
+
    @api recordRow;
    @api wireResult;
    isShowDeleteScreen = false;
+
    @api show() {
       this.isShowDeleteScreen = true;
    }
-   @wire(getContactList)
+
+   @wire(getContacts)
+
    wiredCallback(result) {
       this.wireResult = result;
    }
@@ -18,13 +22,15 @@ export default class DeleteScreen extends LightningElement {
    closeDeleteScreen() { 
       this.isShowDeleteScreen = false;
    } 
+
    deleteContact(){
-      this.deleteCons(this.recordRow);
+      this.deleteCon(this.recordRow);
    } 
-   deleteCons(currentRow) {
+
+   deleteCon (currentRow) {
       let currentRecord = [];
       currentRecord.push(currentRow.Id);
-      delSelectedCons({lstConIds: currentRecord}).then(()=> {
+      deleteSelectedContacts ({lstConIds: currentRecord}).then(()=> {
          this.dispatchEvent(new ShowToastEvent({
             title: 'Success!!',
             message: 'Contact ' + currentRow.FirstName + ' '+ currentRow.LastName +' deleted.',
@@ -35,7 +41,7 @@ export default class DeleteScreen extends LightningElement {
             'callpasstoparent', {
                 detail: this.visible 
             });
-        this.dispatchEvent(custEvent);
+         this.dispatchEvent(custEvent);
       })
    }
 }
