@@ -38,4 +38,33 @@ private class ContactControllerTest {
 
       System.assert(isException, 'Contact should have thrown an exception');
    }
+
+   @isTest
+   private static void deleteContacts_wireContacts_contactsReceived() {
+      Contact contactToDelete = new Contact();
+        
+         Test.startTest();
+         ContactController.deleteContacts(contactToDelete.Id);
+         Test.stopTest();
+
+   }
+
+   @isTest
+   private static void deleteContacts_wireContacts_errorThrown() {
+      Contact contactToDelete = new Contact();
+      List<Contact> allContacts = [SELECT Id FROM Contact];
+      delete allContacts;
+        
+         Test.startTest();
+         Boolean isException = false;
+         try {
+            ContactController.deleteContacts(contactToDelete.Id);
+         } catch (Exception e) {
+            if (e.getMessage().contains('Contacts are empty')) {
+               isException = true;
+            }
+         }
+         Test.stopTest();
+
+   }
 }

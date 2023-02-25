@@ -10,17 +10,8 @@ public with sharing class ContactController {
    }
 
    @AuraEnabled
-   public static void deleteContacts(List<Id> lstConIds){
-      try {
-         List<Contact> lstConsToDelete = new List<Contact>();
-         for(Id idCon : lstConIds) {
-            lstConsToDelete.add(new Contact(Id = idCon));
-         }
-         if(!lstConsToDelete.isEmpty()) {
-            delete lstConsToDelete;
-         }   
-      } catch(Exception ex) {
-            throw new AuraHandledException(ex.getMessage());
-      }
+   public static void deleteContacts(Id contactId){
+      Contact contactToDelete = new Contact(Id = contactId);
+      delete contactToDelete;   
    }
 }
